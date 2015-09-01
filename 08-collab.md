@@ -8,8 +8,7 @@ minutes: 25
 >
 > *  Collaborate pushing to a common repository.
 
-For the next step, get into pairs.
-One person will be the "Owner" (this is the person whose Github repository will be used to start the exercise) and the other person will be the "Collaborator" (this is the person who will be cloning the Owner's repository and making changes to it).
+For the next step, we are going to simulate collaborating. You can think of this either as collaborating with another person, or as what you might do if you were using a git repo on two different computers (say, your work computer and your laptop at home). 
 
 > ## Practicing by yourself {.callout}
 >
