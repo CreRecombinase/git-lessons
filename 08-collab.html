@@ -30,7 +30,7 @@
           <h2 class="subtitle">Collaborating</h2>
           <section class="objectives panel panel-warning">
 <div class="panel-heading">
-<h2><span class="glyphicon glyphicon-certificate"></span>Learning Objectives</h2>
+<h2 id="learning-objectives"><span class="glyphicon glyphicon-certificate"></span>Learning Objectives</h2>
 </div>
 <div class="panel-body">
 <ul>
@@ -38,64 +38,46 @@
 </ul>
 </div>
 </section>
-<p>For the next step, get into pairs. Pick one of your repositories on GitHub to use for collaboration.</p>
-<aside class="callout panel panel-info">
-<div class="panel-heading">
-<h2><span class="glyphicon glyphicon-pushpin"></span>Practicing by yourself</h2>
-</div>
-<div class="panel-body">
-<p>If you’re working through this lesson on your own, you can carry on by opening a second terminal window, and switching to another directory (e.g. <code>/tmp</code>). This window will represent your partner, working on another computer. You won’t need to give anyone access on GitHub, because both ‘partners’ are you.</p>
-</div>
-</aside>
-<p>The partner whose repository is being used needs to give the other person access. On GitHub, click the settings button on the right, then select Collaborators, and enter your partner’s username.</p>
+<p>For the next step, we are going to simulate collaborating. You can think of this either as collaborating with another person, or as what you might do if you were using a git repo on two different computers (say, your work computer and your laptop at home).</p>
+<p>We can simulate working with a collaborator using another copy of the repository on our local machine. To do this, <code>cd</code> to the directory <code>/tmp</code>. (Note the absolute path: don’t make <code>tmp</code> a subdirectory of the existing repository). Instead of creating a new repository here with <code>git init</code>, we will <code>git clone</code> the existing repository from GitHub:</p>
+<pre><code>$ cd /tmp
+$ git clone https://github.com/vlad/planets.git</code></pre>
+<p>{:class=“in”}</p>
+<p><code>git clone</code> creates a fresh local copy of a remote repository. (We did it in <code>/tmp</code> or some other directory so that we don’t overwrite our existing <code>planets</code> directory.) Our computer now has two copies of the repository:</p>
 <div class="figure">
-<img src="fig/github-add-collaborators.png" alt="Adding collaborators on GitHub" /><p class="caption">Adding collaborators on GitHub</p>
+<img src="fig/git-after-duplicate-clone.svg" alt="After Creating Clone of Repository" />
+<p class="caption">After Creating Clone of Repository</p>
 </div>
-<p>The other partner should <code>cd</code> to another directory (so <code>ls</code> doesn’t show a <code>planets</code> folder), and then make a copy of this repository on your own computer:</p>
-<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">git</span> clone https://github.com/vlad/planets.git</code></pre>
-<p>Replace ‘vlad’ with your partner’s username (the one who owns the repository).</p>
-<p><code>git clone</code> creates a fresh local copy of a remote repository.</p>
-<div class="figure">
-<img src="fig/github-collaboration.svg" alt="After Creating Clone of Repository" /><p class="caption">After Creating Clone of Repository</p>
-</div>
-<p>The new collaborator can now make a change in their copy of the repository:</p>
-<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">cd</span> planets
-$ <span class="kw">nano</span> pluto.txt
-$ <span class="kw">cat</span> pluto.txt</code></pre>
-<pre class="output"><code>It is so a planet!</code></pre>
-<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">git</span> add pluto.txt
-$ <span class="kw">git</span> commit -m <span class="st">&quot;Some notes about Pluto&quot;</span></code></pre>
-<pre class="output"><code> 1 file changed, 1 insertion(+)
- create mode 100644 pluto.txt</code></pre>
+<p>Let’s make a change in the copy in <code>/tmp/planets</code>:</p>
+<pre><code>$ cd /tmp/planets
+$ nano pluto.txt
+$ cat pluto.txt</code></pre>
+<p>{:class=“in”} <sub>~</sub> It is so a planet! <sub><sub><sub> {:class=“out”} </sub></sub></sub> $ git add pluto.txt $ git commit -m “Some notes about Pluto” <sub><sub><sub> {:class=“in”} </sub></sub></sub> 1 file changed, 1 insertion(+) create mode 100644 pluto.txt <sub>~</sub> {:class=“out”}</p>
 <p>then push the change to GitHub:</p>
-<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">git</span> push origin master</code></pre>
-<pre class="output"><code>Counting objects: 4, done.
-Delta compression using up to 4 threads.
-Compressing objects: 100% (2/2), done.
-Writing objects: 100% (3/3), 306 bytes, done.
-Total 3 (delta 0), reused 0 (delta 0)
-To https://github.com/vlad/planets.git
-   9272da5..29aba7c  master -&gt; master</code></pre>
+<pre><code>$ git push origin master</code></pre>
+<p>{:class=“in”} <sub>~</sub> Counting objects: 4, done. Delta compression using up to 4 threads. Compressing objects: 100% (2/2), done. Writing objects: 100% (3/3), 306 bytes, done. Total 3 (delta 0), reused 0 (delta 0) To https://github.com/vlad/planets.git 9272da5..29aba7c master -&gt; master <sub>~</sub> {:class=“out”}</p>
 <p>Note that we didn’t have to create a remote called <code>origin</code>: Git does this automatically, using that name, when we clone a repository. (This is why <code>origin</code> was a sensible choice earlier when we were setting up remotes by hand.)</p>
+<p>Our three repositories now look like this:</p>
+<div class="figure">
+<img src="fig/git-after-change-to-duplicate-repo.svg" alt="After Pushing Change from Duplicate Repository" />
+<p class="caption">After Pushing Change from Duplicate Repository</p>
+</div>
 <p>We can now download changes into the original repository on our machine:</p>
-<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">git</span> pull origin master</code></pre>
-<pre class="output"><code>remote: Counting objects: 4, done.
-remote: Compressing objects: 100% (2/2), done.
-remote: Total 3 (delta 0), reused 3 (delta 0)
-Unpacking objects: 100% (3/3), done.
-From https://github.com/vlad/planets
- * branch            master     -&gt; FETCH_HEAD
-Updating 9272da5..29aba7c
-Fast-forward
- pluto.txt | 1 +
- 1 file changed, 1 insertion(+)
- create mode 100644 pluto.txt</code></pre>
+<pre><code>$ cd ~/planets
+$ git pull origin master</code></pre>
+<p>{:class=“in”} <sub>~</sub> remote: Counting objects: 4, done. remote: Compressing objects: 100% (2/2), done. remote: Total 3 (delta 0), reused 3 (delta 0) Unpacking objects: 100% (3/3), done. From https://github.com/vlad/planets * branch master -&gt; FETCH_HEAD Updating 9272da5..29aba7c Fast-forward pluto.txt | 1 + 1 file changed, 1 insertion(+) create mode 100644 pluto.txt <sub>~</sub> {:class=“out”}</p>
+<p>which gives us this:</p>
+<div class="figure">
+<img src="fig/git-after-pulling-to-local-repo.svg" alt="After Pulling Change to Local Repository" />
+<p class="caption">After Pulling Change to Local Repository</p>
+</div>
+<p>In practice, we would probably never have two copies of the same remote repository on our laptop at once. Instead, one of those copies would be on our laptop, and the other on a lab machine, or on someone else’s computer. Pushing and pulling changes gives us a reliable way to share work between different people and machines.</p>
         </div>
       </div>
       </article>
       <div class="footer">
         <a class="label swc-blue-bg" href="http://software-carpentry.org">Software Carpentry</a>
-        <a class="label swc-blue-bg" href="https://github.com/swcarpentry/git-novice">Source</a>
+        <a class="label swc-blue-bg" href="https://github.com/swcarpentry/lesson-template">Source</a>
         <a class="label swc-blue-bg" href="mailto:admin@software-carpentry.org">Contact</a>
         <a class="label swc-blue-bg" href="LICENSE.html">License</a>
       </div>
