@@ -10,58 +10,56 @@ minutes: 25
 
 For the next step, we are going to simulate collaborating. You can think of this either as collaborating with another person, or as what you might do if you were using a git repo on two different computers (say, your work computer and your laptop at home). 
 
-> ## Practicing by yourself {.callout}
->
-> If you're working through this lesson on your own, you can carry on by opening
-> a second terminal window, and switching to another directory (e.g. `/tmp`).
-> This window will represent your partner, working on another computer. You
-> won't need to give anyone access on GitHub, because both 'partners' are you.
+We can simulate working with a collaborator using another copy of the repository on our local machine.
+To do this,
+`cd` to the directory `/tmp`.
+(Note the absolute path:
+don't make `tmp` a subdirectory of the existing repository).
+Instead of creating a new repository here with `git init`,
+we will `git clone` the existing repository from GitHub:
 
-The Owner needs to give the Collaborator access.
-On GitHub, click the settings button on the right,
-then select Collaborators, and enter your partner's username.
-
-![Adding collaborators on GitHub](fig/github-add-collaborators.png)
-
-The Collaborator needs to work on this project locally. He or she should `cd` to another directory
-(so `ls` doesn't show a `planets` folder),
-and then make a copy of the Owner's repository:
-
-~~~ {.bash}
+~~~
+$ cd /tmp
 $ git clone https://github.com/vlad/planets.git
 ~~~
-
-Replace 'vlad' with the Owner's username.
+{:class="in"}
 
 `git clone` creates a fresh local copy of a remote repository.
+(We did it in `/tmp` or some other directory so that we don't overwrite our existing `planets` directory.)
+Our computer now has two copies of the repository:
 
-![After Creating Clone of Repository](fig/github-collaboration.svg)
+![After Creating Clone of Repository](fig/git-after-duplicate-clone.svg)
 
-The Collaborator can now make a change in his or her copy of the repository:
+Let's make a change in the copy in `/tmp/planets`:
 
-~~~ {.bash}
-$ cd planets
+~~~
+$ cd /tmp/planets
 $ nano pluto.txt
 $ cat pluto.txt
 ~~~
-~~~ {.output}
+{:class="in"}
+~~~
 It is so a planet!
 ~~~
-~~~ {.bash}
+{:class="out"}
+~~~
 $ git add pluto.txt
 $ git commit -m "Some notes about Pluto"
 ~~~
-~~~ {.output}
+{:class="in"}
+~~~
  1 file changed, 1 insertion(+)
  create mode 100644 pluto.txt
 ~~~
+{:class="out"}
 
-Then push the change to GitHub:
+then push the change to GitHub:
 
-~~~ {.bash}
+~~~
 $ git push origin master
 ~~~
-~~~ {.output}
+{:class="in"}
+~~~
 Counting objects: 4, done.
 Delta compression using up to 4 threads.
 Compressing objects: 100% (2/2), done.
@@ -70,6 +68,7 @@ Total 3 (delta 0), reused 0 (delta 0)
 To https://github.com/vlad/planets.git
    9272da5..29aba7c  master -> master
 ~~~
+{:class="out"}
 
 Note that we didn't have to create a remote called `origin`:
 Git does this automatically,
@@ -78,12 +77,19 @@ when we clone a repository.
 (This is why `origin` was a sensible choice earlier
 when we were setting up remotes by hand.)
 
+
+Our three repositories now look like this:
+
+![After Pushing Change from Duplicate Repository](fig/git-after-change-to-duplicate-repo.svg)
+
 We can now download changes into the original repository on our machine:
 
-~~~ {.bash}
+~~~
+$ cd ~/planets
 $ git pull origin master
 ~~~
-~~~ {.output}
+{:class="in"}
+~~~
 remote: Counting objects: 4, done.
 remote: Compressing objects: 100% (2/2), done.
 remote: Total 3 (delta 0), reused 3 (delta 0)
@@ -96,3 +102,18 @@ Fast-forward
  1 file changed, 1 insertion(+)
  create mode 100644 pluto.txt
 ~~~
+{:class="out"}
+
+which gives us this:
+
+![After Pulling Change to Local Repository](fig/git-after-pulling-to-local-repo.svg)
+
+In practice,
+we would probably never have two copies of the same remote repository
+on our laptop at once.
+Instead,
+one of those copies would be on our laptop,
+and the other on a lab machine,
+or on someone else's computer.
+Pushing and pulling changes gives us a reliable way
+to share work between different people and machines.
