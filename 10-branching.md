@@ -142,14 +142,23 @@ $ git push --all origin
 ~~~
 
 ~~~ {.output}
-FILL IN OUTPUT HERE
+Counting objects: 3, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 348 bytes | 0 bytes/s, done.
+Total 3 (delta 1), reused 0 (delta 0)
+To https://github.com/erdavenport/planets.git
+   4959da7..a822910  master -> master
+ * [new branch]      experimental -> experimental
 ~~~
 
-Branches can be difficult to visualize in your head. GitHub has a nice feature that will let you examine your commits on each branch:
+Branches can be difficult to visualize in your head. GitHub has a nice feature that will let you examine your commits on each branch. Find the graphs link of your repository home page:
 
-![Locating Graphs on GitHub](fig/github-find-graphs-image.svg)
+![Locating Graphs on GitHub](fig/github-find-graphs-image.png)  
 
-![Viewing Branch and Commit History on GitHub](fig/github-graphs-image.svg)
+You can see a graphical representation of your commit and branch history here. If you hover your cursor over the dots (commits), a box will display the commit message and ID. Your different branches are shown in different colors, with an arrow indicating when you merged two branches together.
+
+![Viewing Branch and Commit History on GitHub](fig/github-graphs-image.png)
 
 We no longer have a use for our experimental branch. To delete a branch you don't need, you can use the `-d` flag of `git branch`:
 
