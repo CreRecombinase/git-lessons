@@ -64,9 +64,10 @@ to be shared can and should be stored in a version control system.
 7.  [Remotes in GitHub](07-github.html)
 8.  [Collaborating](08-collab.html)
 9.  [Conflicts](09-conflict.html)
-10. [Open Science](10-open.html)
-11. [Licensing](11-licensing.html)
-12. [Hosting](12-hosting.html)
+10.	[Branching](10-branching.html)
+11. [Open Science](11-open.html)
+12. [Licensing](12-licensing.html)
+13. [Hosting](13-hosting.html)
 
 ## Other Resources
 
