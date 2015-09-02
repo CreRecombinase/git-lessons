@@ -169,3 +169,14 @@ $ git branch -d experimental
 ~~~ {.output}
 Deleted branch experimental (was c5d6cba).
 ~~~
+
+
+> ## Creating and Merging Branches {.challenge}
+>
+> In your `bio` repository you made earlier, do the following:
+>
+> 1. Create a branch called `grad_school`
+>
+> 2. Create a file called `thesis` and write one line about your research (or something about science if you don't know what you'll be researching yet)
+> 
+> 3. Merge those changes back to the master branch of `bio`. 
