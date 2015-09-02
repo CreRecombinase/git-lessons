@@ -17,8 +17,8 @@ different changes to each copy.  Version control helps us manage these
 [resolve](reference.html#resolve) overlapping changes.
 
 To see how we can resolve conflicts, we must first create one.  The file
-`mars.txt` currently looks like this in both partners' copies of our `planets`
-repository:
+`mars.txt` currently looks like this in both copies of our `planets`
+repository (the one in our home directory and the one in `\tmp`:
 
 ~~~ {.bash}
 $ cat mars.txt
@@ -29,7 +29,7 @@ The two moons may be a problem for Wolfman
 But the Mummy will appreciate the lack of humidity
 ~~~
 
-Let's add a line to one partner's copy only:
+Let's add a line to the copy under our home directory:
 
 ~~~ {.bash}
 $ nano mars.txt
@@ -39,7 +39,7 @@ $ cat mars.txt
 Cold and dry, but everything is my favorite color
 The two moons may be a problem for Wolfman
 But the Mummy will appreciate the lack of humidity
-This line added to Wolfman's copy
+This line added to our home copy
 ~~~
 
 and then push the change to GitHub:
@@ -65,11 +65,16 @@ To https://github.com/vlad/planets
    29aba7c..dabb4c8  master -> master
 ~~~
 
-Now let's have the other partner
-make a different change to their copy
+Our repositories are now in this state:
+
+![After Making First Change](fig/git-after-first-conflicting-change.svg)
+
+Now let's  switch to the copy under `/tmp`
+make a different change there
 *without* updating from GitHub:
 
 ~~~ {.bash}
+$ cd /tmp/planets
 $ nano mars.txt
 $ cat mars.txt
 ~~~
@@ -77,19 +82,23 @@ $ cat mars.txt
 Cold and dry, but everything is my favorite color
 The two moons may be a problem for Wolfman
 But the Mummy will appreciate the lack of humidity
-We added a different line in the other copy
+We added a different line in the temporary copy
 ~~~
 
 We can commit the change locally:
 
 ~~~ {.bash}
 $ git add mars.txt
-$ git commit -m "Adding a line in my copy"
+$ git commit -m "Adding a line in the temporary copy"
 ~~~
 ~~~ {.output}
-[master 07ebc69] Adding a line in my copy
+[master 07ebc69] Adding a line in the temporary copy
  1 file changed, 1 insertion(+)
 ~~~
+
+giving us the following local repository state:
+
+![After Making Second Change](fig/git-after-second-conflicting-change.svg)
 
 but Git won't let us push it to GitHub:
 
@@ -141,9 +150,9 @@ Cold and dry, but everything is my favorite color
 The two moons may be a problem for Wolfman
 But the Mummy will appreciate the lack of humidity
 <<<<<<< HEAD
-We added a different line in the other copy
+We added a different line in the temporary copy
 =======
-This line added to Wolfman's copy
+This line added to our home copy
 >>>>>>> dabb4c8c450e8475aee9b14b4383acc99f42af1d
 ~~~
 
@@ -195,6 +204,10 @@ $ git commit -m "Merging changes from GitHub"
 [master 2abf2b1] Merging changes from GitHub
 ~~~
 
+Our repositories now look like this after locally merging in the changes:
+
+![After Merging Changes Locally](fig/git-after-merging.svg)
+
 Now we can push our changes to GitHub:
 
 ~~~ {.bash}
@@ -210,11 +223,16 @@ To https://github.com/vlad/planets.git
    dabb4c8..2abf2b1  master -> master
 ~~~
 
+We now have this:
+
+![After Pushing the Merged Changes to GitHub](fig/git-after-pushing-merge.svg)
+
 Git keeps track of what we've merged with what,
 so we don't have to fix things by hand again
-when the collaborator who made the first change pulls again:
+if we switch back to the repository in our home directory and pull from GitHub:
 
 ~~~ {.bash}
+$ cd ~/planets
 $ git pull origin master
 ~~~
 ~~~ {.output}
