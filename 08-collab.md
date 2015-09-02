@@ -18,11 +18,10 @@ don't make `tmp` a subdirectory of the existing repository).
 Instead of creating a new repository here with `git init`,
 we will `git clone` the existing repository from GitHub:
 
-~~~
+~~~ {.bash}
 $ cd /tmp
 $ git clone https://github.com/vlad/planets.git
 ~~~
-{:class="in"}
 
 `git clone` creates a fresh local copy of a remote repository.
 (We did it in `/tmp` or some other directory so that we don't overwrite our existing `planets` directory.)
@@ -32,34 +31,33 @@ Our computer now has two copies of the repository:
 
 Let's make a change in the copy in `/tmp/planets`:
 
-~~~
+~~~ {.bash}
 $ cd /tmp/planets
 $ nano pluto.txt
 $ cat pluto.txt
 ~~~
-{:class="in"}
-~~~
+
+~~~ {.output}
 It is so a planet!
 ~~~
-{:class="out"}
-~~~
+
+~~~ {.bash}
 $ git add pluto.txt
 $ git commit -m "Some notes about Pluto"
 ~~~
-{:class="in"}
-~~~
+
+~~~ {.output}
  1 file changed, 1 insertion(+)
  create mode 100644 pluto.txt
 ~~~
-{:class="out"}
 
 then push the change to GitHub:
 
-~~~
+~~~ {.bash}
 $ git push origin master
 ~~~
-{:class="in"}
-~~~
+
+~~~ {.output}
 Counting objects: 4, done.
 Delta compression using up to 4 threads.
 Compressing objects: 100% (2/2), done.
@@ -68,7 +66,6 @@ Total 3 (delta 0), reused 0 (delta 0)
 To https://github.com/vlad/planets.git
    9272da5..29aba7c  master -> master
 ~~~
-{:class="out"}
 
 Note that we didn't have to create a remote called `origin`:
 Git does this automatically,
@@ -84,12 +81,12 @@ Our three repositories now look like this:
 
 We can now download changes into the original repository on our machine:
 
-~~~
+~~~ {.bash}
 $ cd ~/planets
 $ git pull origin master
 ~~~
-{:class="in"}
-~~~
+
+~~~ {.output}
 remote: Counting objects: 4, done.
 remote: Compressing objects: 100% (2/2), done.
 remote: Total 3 (delta 0), reused 3 (delta 0)
@@ -102,7 +99,6 @@ Fast-forward
  1 file changed, 1 insertion(+)
  create mode 100644 pluto.txt
 ~~~
-{:class="out"}
 
 which gives us this:
 

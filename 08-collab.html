@@ -40,22 +40,31 @@
 </section>
 <p>For the next step, we are going to simulate collaborating. You can think of this either as collaborating with another person, or as what you might do if you were using a git repo on two different computers (say, your work computer and your laptop at home).</p>
 <p>We can simulate working with a collaborator using another copy of the repository on our local machine. To do this, <code>cd</code> to the directory <code>/tmp</code>. (Note the absolute path: don’t make <code>tmp</code> a subdirectory of the existing repository). Instead of creating a new repository here with <code>git init</code>, we will <code>git clone</code> the existing repository from GitHub:</p>
-<pre><code>$ cd /tmp
-$ git clone https://github.com/vlad/planets.git</code></pre>
-<p>{:class=“in”}</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">cd</span> /tmp
+$ <span class="kw">git</span> clone https://github.com/vlad/planets.git</code></pre></div>
 <p><code>git clone</code> creates a fresh local copy of a remote repository. (We did it in <code>/tmp</code> or some other directory so that we don’t overwrite our existing <code>planets</code> directory.) Our computer now has two copies of the repository:</p>
 <div class="figure">
 <img src="fig/git-after-duplicate-clone.svg" alt="After Creating Clone of Repository" />
 <p class="caption">After Creating Clone of Repository</p>
 </div>
 <p>Let’s make a change in the copy in <code>/tmp/planets</code>:</p>
-<pre><code>$ cd /tmp/planets
-$ nano pluto.txt
-$ cat pluto.txt</code></pre>
-<p>{:class=“in”} <sub>~</sub> It is so a planet! <sub><sub><sub> {:class=“out”} </sub></sub></sub> $ git add pluto.txt $ git commit -m “Some notes about Pluto” <sub><sub><sub> {:class=“in”} </sub></sub></sub> 1 file changed, 1 insertion(+) create mode 100644 pluto.txt <sub>~</sub> {:class=“out”}</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">cd</span> /tmp/planets
+$ <span class="kw">nano</span> pluto.txt
+$ <span class="kw">cat</span> pluto.txt</code></pre></div>
+<pre class="output"><code>It is so a planet!</code></pre>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">git</span> add pluto.txt
+$ <span class="kw">git</span> commit -m <span class="st">&quot;Some notes about Pluto&quot;</span></code></pre></div>
+<pre class="output"><code> 1 file changed, 1 insertion(+)
+ create mode 100644 pluto.txt</code></pre>
 <p>then push the change to GitHub:</p>
-<pre><code>$ git push origin master</code></pre>
-<p>{:class=“in”} <sub>~</sub> Counting objects: 4, done. Delta compression using up to 4 threads. Compressing objects: 100% (2/2), done. Writing objects: 100% (3/3), 306 bytes, done. Total 3 (delta 0), reused 0 (delta 0) To https://github.com/vlad/planets.git 9272da5..29aba7c master -&gt; master <sub>~</sub> {:class=“out”}</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">git</span> push origin master</code></pre></div>
+<pre class="output"><code>Counting objects: 4, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 306 bytes, done.
+Total 3 (delta 0), reused 0 (delta 0)
+To https://github.com/vlad/planets.git
+   9272da5..29aba7c  master -&gt; master</code></pre>
 <p>Note that we didn’t have to create a remote called <code>origin</code>: Git does this automatically, using that name, when we clone a repository. (This is why <code>origin</code> was a sensible choice earlier when we were setting up remotes by hand.)</p>
 <p>Our three repositories now look like this:</p>
 <div class="figure">
@@ -63,9 +72,19 @@ $ cat pluto.txt</code></pre>
 <p class="caption">After Pushing Change from Duplicate Repository</p>
 </div>
 <p>We can now download changes into the original repository on our machine:</p>
-<pre><code>$ cd ~/planets
-$ git pull origin master</code></pre>
-<p>{:class=“in”} <sub>~</sub> remote: Counting objects: 4, done. remote: Compressing objects: 100% (2/2), done. remote: Total 3 (delta 0), reused 3 (delta 0) Unpacking objects: 100% (3/3), done. From https://github.com/vlad/planets * branch master -&gt; FETCH_HEAD Updating 9272da5..29aba7c Fast-forward pluto.txt | 1 + 1 file changed, 1 insertion(+) create mode 100644 pluto.txt <sub>~</sub> {:class=“out”}</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">cd</span> ~/planets
+$ <span class="kw">git</span> pull origin master</code></pre></div>
+<pre class="output"><code>remote: Counting objects: 4, done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 3 (delta 0), reused 3 (delta 0)
+Unpacking objects: 100% (3/3), done.
+From https://github.com/vlad/planets
+ * branch            master     -&gt; FETCH_HEAD
+Updating 9272da5..29aba7c
+Fast-forward
+ pluto.txt | 1 +
+ 1 file changed, 1 insertion(+)
+ create mode 100644 pluto.txt</code></pre>
 <p>which gives us this:</p>
 <div class="figure">
 <img src="fig/git-after-pulling-to-local-repo.svg" alt="After Pulling Change to Local Repository" />
