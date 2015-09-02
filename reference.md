@@ -49,11 +49,16 @@ subtitle: Reference
 *   The version control system does not allow people to blindly overwrite each other's changes.
     Instead, it highlights conflicts so that they can be resolved.
 
-## [Open Science](10-open.html)
+## [Branching](10-branching.html)
+
+*	Branching allows you to maintain several parallel sets of code so that you can test features on one set, while maintaining the original versions.   
+*	`git branch` followed by a name will allow you to set up a branch in the current repository
+
+## [Open Science](11-open.html)
 
 *   Open scientific work is more useful and more highly cited than closed.
 
-## [Licensing](11-licensing.html)
+## [Licensing](12-licensing.html)
 
 *   People who incorporate GPL'd software into their own software must
     make their software also open under the GPL license; most other
@@ -64,7 +69,7 @@ subtitle: Reference
 *   People who are not lawyers should not try to write licenses from
     scratch.
 
-## [Hosting](12-hosting.html)
+## [Hosting](13-hosting.html)
 
 *   Projects can be hosted on university servers,
     on personal domains,
@@ -73,6 +78,9 @@ subtitle: Reference
     no matter where code and data are hosted.
 
 ## Glossary
+
+branch
+:	A parallel instance of files in a repository  
 
 change set
 :   A group of changes to one or more files that are or will be added
