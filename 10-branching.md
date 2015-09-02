@@ -1,8 +1,8 @@
 ---
 layout: page
 title: Version Control with Git
-subtitle: Conflicts
-minutes: 15
+subtitle: Branching
+minutes: 20?
 ---
 > ## Learning Objectives {.objectives}
 >
@@ -136,6 +136,7 @@ A planet with a charming heart on its surface; What's not to love?
 ~~~
 
 Now let's push all these changes up to github:
+
 ~~~ {.bash}
 $ git push --all origin
 ~~~
