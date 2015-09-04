@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="generator" content="pandoc">
+    <title>Software Carpentry: Version Control with Git</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap-theme.css" />
+    <link rel="stylesheet" type="text/css" href="css/swc.css" />
+    <link rel="alternate" type="application/rss+xml" title="Software Carpentry Blog" href="http://software-carpentry.org/feed.xml"/>
+    <meta charset="UTF-8" />
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body class="lesson">
+    <div class="container card">
+      <div class="banner">
+        <a href="http://software-carpentry.org" title="Software Carpentry">
+          <img alt="Software Carpentry banner" src="img/software-carpentry-banner.png" />
+        </a>
+      </div>
+      <article>
+      <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+                    <a href="index.html"><h1 class="title">Version Control with Git</h1></a>
+          <h2 class="subtitle">Contributing</h2>
+          <section class="objectives panel panel-warning">
+<div class="panel-heading">
+<h2 id="learning-objectives"><span class="glyphicon glyphicon-certificate"></span>Learning Objectives</h2>
+</div>
+<div class="panel-body">
+<ul>
+<li>Learn how to fork, pull upstream changes, and issue pull requests.</li>
+<li>Contribute to the repository set up for this workshop.</li>
+</ul>
+</div>
+</section>
+<p>One of the strengths of using version control is its usefulness for enabling controlled contribution to existing projects. What do we mean by controlled contribution? Let’s say you notice a typo in someone else’s repository. Using the tools we’ll teach you in this lesson, you’ll be able to edit their code and send them those edits, which they can choose to accept or reject. This gives the owner of the project full control, but there are easy mechanisms for large numbers of people to work on the same code at the same time.</p>
+<p>Let’s all collaborate on a single project. We want to get a rough sense of where everyone is from who is here for the bootcamp. We have a <a href="https://github.com/erdavenport/forkme">repo</a> set up where we would like you to submit a file that lists either the state you’re from (or country if you’re international) with your initials (for example: <code>wisconsin_ERD.txt</code>).</p>
+<p>The first thing you need to do is navigate to this repo: https://github.com/erdavenport/forkme</p>
+<p>Next, we are going to create a copy of this repository in our own GitHub accounts by clicking the “Fork” button in the upper right and corner of the repo page:</p>
+<div class="figure">
+<img src="fig/github-fork-repo.png" alt="Forking Repo on GitHub" />
+<p class="caption">Forking Repo on GitHub</p>
+</div>
+<p>Let’s clone the repo into our home directory so we can start adding files. Ensure you clone the version of the repository that is under your username:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">cd</span> 
+$ <span class="kw">git</span> clone https://github.com/YOUR_USER_NAME/forkme.git</code></pre></div>
+<pre class="output"><code>Cloning into &#39;forkme&#39;...
+remote: Counting objects: 3, done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+Unpacking objects: 100% (3/3), done.</code></pre>
+<p>Let’s enter the <code>forkme</code> repository and look at the remotes:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">cd</span> forkme
+$ <span class="kw">git</span> remote -v</code></pre></div>
+<pre class="output"><code>origin  https://github.com/erd-test/forkme.git (fetch)
+origin  https://github.com/erd-test/forkme.git (push)</code></pre>
+<p>The remotes show a connection to the forked copy of <code>forkme</code> that sits in your GitHub account. However, what if changes happened in the original forkme repository since you’ve forked it? In order to stay up to date with the original repository, we need to set a remote link called <code>upstream</code> which links to the original forkme repo:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">git</span> remote add upstream https://github.com/erdavenport/forkme.git
+$ <span class="kw">git</span> remote -v</code></pre></div>
+<pre class="output"><code>origin  https://github.com/erd-test/forkme.git (fetch)
+origin  https://github.com/erd-test/forkme.git (push)
+upstream    https://github.com/erdavenport/forkme.git (fetch)
+upstream    https://github.com/erdavenport/forkme.git (push)</code></pre>
+<p><code>upstream</code> allows us to pull down changes from the original repository. This will keep us up to date with the current state of the repository. We just forked and cloned this repository, so it’s unlikely changes have already occurred. Regardless, a good practice is to always ensure you are up-to-date with the upstream repo before starting to make changes. To do so, we need to <code>pull</code>:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">git</span> pull upstream master</code></pre></div>
+<pre class="output"><code>From https://github.com/erdavenport/forkme
+ * branch            master     -&gt; FETCH_HEAD
+Already up-to-date.</code></pre>
+<p>You can see our forked copies were up-to-date with the original repo, and no new files were added. I’m going to make a change to this repository and have you re-fetch to demonstrate what happens when there are differences between your local copy and what is upstream. When I give you the go ahead, run the pull command again:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">git</span> pull upstream master</code></pre></div>
+<pre class="output"><code>remote: Counting objects: 3, done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 3 (delta 0), reused 3 (delta 0), pack-reused 0
+Unpacking objects: 100% (3/3), done.
+From https://github.com/erdavenport/forkme
+ * branch            master     -&gt; FETCH_HEAD
+Updating 3785f25..146fa46
+Fast-forward
+ 0 files changed
+ create mode 100644 wisconsin_ERD.txt</code></pre>
+<p>Now that we know we’re up to date with the upstream repo, add your own file to the repository. Add and commit that file locally:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">touch</span> place_initials.txt
+$ <span class="kw">git</span> add place_initials.txt
+$ <span class="kw">git</span> commit -m <span class="st">&quot;added my file&quot;</span></code></pre></div>
+<p><sub>~</sub> {.output} 0 files changed create mode 100644 hogwarts_HP.txt <sub>~</sub></p>
+<p>Your new file exists in your local repository, but it doesn’t exist yet on your repo on GitHub or in the upstream repository. First, let’s push these changes to our forkme repository under our GitHub account:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">git</span> push origin master</code></pre></div>
+<pre class="output"><code>Counting objects: 6, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (5/5), 488 bytes, done.
+Total 5 (delta 1), reused 0 (delta 0)
+To https://github.com/erd-test/forkme.git
+   3785f25..31e7bae  master -&gt; master</code></pre>
+<p>Note that not only was the file we just created pushed to our remote, but also the <code>wisconsin_ERD.txt</code> file we had pulled from the upstream earlier.</p>
+<p>We want to make our contribution to the original <code>forkme</code> repo. To do so, we need to issue what’s called a pull request in GitHub jargon. A pull request is just what it sounds like: this is a message from you to the owner of the upstream repository, where you request them to pull your changes. Pull requests give the owner of the upstream repository control of whether to accept your changes or not.</p>
+<p>Let’s issue pull requests of our newly added file, to incorporate that into the original <code>forkme</code> repository. On GitHub, click the button to the right that says “Pull Requests”:</p>
+<div class="figure">
+<img src="fig/github-start-pr.png" alt="Start Pull Request" />
+<p class="caption">Start Pull Request</p>
+</div>
+<p>Then click the bright green button that says “New pull request”:</p>
+<div class="figure">
+<img src="fig/github-new-pr.png" alt="New Pull Request" />
+<p class="caption">New Pull Request</p>
+</div>
+<p>Here you’ll see a dropdown saying we want to merge the changes from our head fork (<code>your_user_name/forkme</code>) to the base fork (<code>erdavenport/forkme</code>). To issue the pull request, click the green “Create pull request button”:</p>
+<div class="figure">
+<img src="fig/github-issue-pr.png" alt="Issue Pull Request" />
+<p class="caption">Issue Pull Request</p>
+</div>
+<p>It’s useful to enter details about why you are requesting the pull request and what you’ve changed in the next screen.</p>
+<div class="figure">
+<img src="fig/github-describe-pr.png" alt="Describe Pull Request" />
+<p class="caption">Describe Pull Request</p>
+</div>
+<p>Once you’ve issued the PR, you’ll see a screen like what is shown below. On this screen, you can enter additional comments to send to the owner (and they can send you comments as well). Additionally, you can delete the PR if you change your mind about the pull.</p>
+<div class="figure">
+<img src="fig/github-sent-pr.png" alt="Pull Request" />
+<p class="caption">Pull Request</p>
+</div>
+<p>Once you’ve issued the PR, and email is sent to the owner of the upstream repository. Over the next few minutes, I will accept PRs from people in the class. Look at the repository link to see where everyone is from!</p>
+        </div>
+      </div>
+      </article>
+      <div class="footer">
+        <a class="label swc-blue-bg" href="http://software-carpentry.org">Software Carpentry</a>
+        <a class="label swc-blue-bg" href="https://github.com/swcarpentry/lesson-template">Source</a>
+        <a class="label swc-blue-bg" href="mailto:admin@software-carpentry.org">Contact</a>
+        <a class="label swc-blue-bg" href="LICENSE.html">License</a>
+      </div>
+    </div>
+    <!-- Javascript placed at the end of the document so the pages load faster -->
+    <script src="http://software-carpentry.org/v5/js/jquery-1.9.1.min.js"></script>
+    <script src="css/bootstrap/bootstrap-js/bootstrap.js"></script>
+  </body>
+</html>
