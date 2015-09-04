@@ -54,11 +54,16 @@ subtitle: Reference
 *	Branching allows you to maintain several parallel sets of code so that you can test features on one set, while maintaining the original versions.   
 *	`git branch` followed by a name will allow you to set up a branch in the current repository
 
-## [Open Science](11-open.html)
+## [Contributing](11-contributing.html)
+
+*	GitHub's pull request system is a way for an owner of a repository to control what edits are incorporated from users not designated as collaborators on GitHub for a particular repository.   
+*	Users wishing to contribute to an existing project should fork the project on GitHub, clone the forked repository locally, make changes and commit, push commits to their GitHub page, and then issue a pull request to the owner of the repository.
+
+## [Open Science](12-open.html)
 
 *   Open scientific work is more useful and more highly cited than closed.
 
-## [Licensing](12-licensing.html)
+## [Licensing](13-licensing.html)
 
 *   People who incorporate GPL'd software into their own software must
     make their software also open under the GPL license; most other
@@ -69,7 +74,7 @@ subtitle: Reference
 *   People who are not lawyers should not try to write licenses from
     scratch.
 
-## [Hosting](13-hosting.html)
+## [Hosting](14-hosting.html)
 
 *   Projects can be hosted on university servers,
     on personal domains,
