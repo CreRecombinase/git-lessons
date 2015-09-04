@@ -65,6 +65,16 @@ A planet with a charming heart on its surface; What&#39;s not to love?</code></p
 $ <span class="kw">git</span> commit -m <span class="st">&quot;Breaking updates about Pluto&quot;</span></code></pre></div>
 <pre class="output"><code>[experimental c5d6cba] Breaking updates about Pluto
  1 file changed, 1 insertion(+)</code></pre>
+<p>We’ve committed these changes locally, but we need to push these changes and our new branch to GitHub. To do so, we enter the following command:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">git</span> push origin experimental</code></pre></div>
+<pre class="output"><code>Counting objects: 5, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 307 bytes, done.
+Total 3 (delta 2), reused 0 (delta 0)
+To https://github.com/erdavenport/planets.git
+ * [new branch]      experimental -&gt; experimental</code></pre>
+<p>Note that in the past we’ve types <code>git push origin master</code> when pushing to our remote. This was because we were making changes on our <code>master</code> branch and pushing to the remote named <code>origin</code>. Here, we’ve been working on our <code>experimental</code> branch. To push those changes to GitHub, we therefore specify that we want to push the <code>experimental</code> branch to the remote named <code>origin</code>.</p>
 <p>Let’s check our status:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">git</span> status</code></pre></div>
 <pre class="output"><code>On branch experimental
@@ -74,7 +84,7 @@ nothing to commit, working directory clean</code></pre>
 <pre class="output"><code>Switched to branch &#39;master&#39;</code></pre>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">cat</span> pluto.txt</code></pre></div>
 <pre class="output"><code>It is so a planet!</code></pre>
-<p>As you can see, the master branch does not include our updated notes about Pluto. We are pretty confident that the heart in Pluto is charming, so let’s fold in all of the changes that we’ve made on the experimental branch into our master branch. To merge two branches together, ensure you are located in the branch you want to fold changes into. In our case, we want to be in the master branch:</p>
+<p>As you can see, the master branch does not include our updated notes about Pluto. If we look on GitHub, we can switch between the <code>master</code> and <code>experimental</code> branch and see the same difference between the two versions of <code>pluto.txt</code>. We are pretty confident that the heart in Pluto is charming, so let’s fold in all of the changes that we’ve made on the experimental branch into our master branch. To merge two branches together, ensure you are located in the branch you want to fold changes into. In our case, we want to be in the master branch:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">git</span> branch</code></pre></div>
 <pre class="output"><code>  experimental
 * master</code></pre>
@@ -88,16 +98,20 @@ Fast-forward
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">cat</span> pluto.txt</code></pre></div>
 <pre class="output"><code>It is so a planet!
 A planet with a charming heart on its surface; What&#39;s not to love?</code></pre>
-<p>Now let’s push all these changes up to github:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">git</span> push --all origin</code></pre></div>
-<pre class="output"><code>Counting objects: 3, done.
-Delta compression using up to 4 threads.
-Compressing objects: 100% (3/3), done.
-Writing objects: 100% (3/3), 348 bytes | 0 bytes/s, done.
-Total 3 (delta 1), reused 0 (delta 0)
+<p>Now let’s push these changes up to github:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">git</span> push origin master</code></pre></div>
+<pre class="output"><code>Total 0 (delta 0), reused 0 (delta 0)
 To https://github.com/erdavenport/planets.git
-   4959da7..a822910  master -&gt; master
- * [new branch]      experimental -&gt; experimental</code></pre>
+   a822910..10ed071  master -&gt; master</code></pre>
+<aside class="callout panel panel-info">
+<div class="panel-heading">
+<h2 id="pushing-all-branches-to-github"><span class="glyphicon glyphicon-pushpin"></span>Pushing all branches to GitHub</h2>
+</div>
+<div class="panel-body">
+<p>If you’ve been working on multiple branches and want to push commits from all branches to GitHub, you can use the following syntax rather than pushing each branch individually:</p>
+<p><code>git push --all origin</code></p>
+</div>
+</aside>
 <p>Branches can be difficult to visualize in your head. GitHub has a nice feature that will let you examine your commits on each branch. Find the graphs link of your repository home page:</p>
 <div class="figure">
 <img src="fig/github-find-graphs-image.png" alt="Locating Graphs on GitHub" />
@@ -111,6 +125,16 @@ To https://github.com/erdavenport/planets.git
 <p>We no longer have a use for our experimental branch. To delete a branch you don’t need, you can use the <code>-d</code> flag of <code>git branch</code>:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">git</span> branch -d experimental</code></pre></div>
 <pre class="output"><code>Deleted branch experimental (was c5d6cba).</code></pre>
+<aside class="callout panel panel-info">
+<div class="panel-heading">
+<h2 id="deleting-a-remote-branch"><span class="glyphicon glyphicon-pushpin"></span>Deleting a remote branch</h2>
+</div>
+<div class="panel-body">
+<p>You’ve deleted your experimental branch locally, but if you look on your GitHub page, you’ll see it still exists, even if you <code>git push --all origin</code>. To delete the branch remotely, you should use the syntax:</p>
+<p><code>git push origin &lt;local-branch&gt;:&lt;remote-branch&gt;</code></p>
+<p>In our example this is: <code>git push origin experimental:experimental</code>. You can also use the shorthand version: <code>git push origin :experimental</code>. Using this notation, Git assumes you are listing the remote branch and want to push the branch you are currently in on the local repo. Essentially you are pushing “nothing” to the remote branch, which erases it.</p>
+</div>
+</aside>
 <section class="challenge panel panel-success">
 <div class="panel-heading">
 <h2 id="creating-and-merging-branches"><span class="glyphicon glyphicon-pencil"></span>Creating and Merging Branches</h2>

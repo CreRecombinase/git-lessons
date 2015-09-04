@@ -71,6 +71,26 @@ $ git commit -m "Breaking updates about Pluto"
  1 file changed, 1 insertion(+)
 ~~~
 
+We've committed these changes locally, but we need to push these changes and our new branch to GitHub. To do so, we enter the following command:  
+
+~~~ {.bash}
+$ git push origin experimental
+~~~
+
+~~~ {.output}
+Counting objects: 5, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 307 bytes, done.
+Total 3 (delta 2), reused 0 (delta 0)
+To https://github.com/erdavenport/planets.git
+ * [new branch]      experimental -> experimental
+~~~
+
+Note that in the past we've types `git push origin master` when pushing to our remote.
+This was because we were making changes on our `master` branch and pushing to the remote named `origin`.
+Here, we've been working on our `experimental` branch. To push those changes to GitHub, we therefore specify that we want to push the `experimental` branch to the remote named `origin`. 
+
 Let's check our status:
 
 ~~~ {.bash}
@@ -100,7 +120,11 @@ $ cat pluto.txt
 It is so a planet!
 ~~~
 
-As you can see, the master branch does not include our updated notes about Pluto. We are pretty confident that the heart in Pluto is charming, so let's fold in all of the changes that we've made on the experimental branch into our master branch. To merge two branches together, ensure you are located in the branch you want to fold changes into. In our case, we want to be in the master branch:
+As you can see, the master branch does not include our updated notes about Pluto. 
+If we look on GitHub, we can switch between the `master` and `experimental` branch and see the same difference between the two versions of `pluto.txt`. 
+We are pretty confident that the heart in Pluto is charming, so let's fold in all of the changes that we've made on the experimental branch into our master branch. 
+To merge two branches together, ensure you are located in the branch you want to fold changes into. 
+In our case, we want to be in the master branch:
 
 ~~~ {.bash}
 $ git branch
@@ -135,22 +159,23 @@ It is so a planet!
 A planet with a charming heart on its surface; What's not to love?
 ~~~
 
-Now let's push all these changes up to github:
+Now let's push these changes up to github:
 
 ~~~ {.bash}
-$ git push --all origin
-~~~
+$ git push origin master
+~~~ 
 
 ~~~ {.output}
-Counting objects: 3, done.
-Delta compression using up to 4 threads.
-Compressing objects: 100% (3/3), done.
-Writing objects: 100% (3/3), 348 bytes | 0 bytes/s, done.
-Total 3 (delta 1), reused 0 (delta 0)
+Total 0 (delta 0), reused 0 (delta 0)
 To https://github.com/erdavenport/planets.git
-   4959da7..a822910  master -> master
- * [new branch]      experimental -> experimental
+   a822910..10ed071  master -> master
 ~~~
+
+> ## Pushing all branches to GitHub {.callout}
+> If you've been working on multiple branches and want to push commits from all branches to GitHub, you can use the following syntax rather than pushing each branch individually:  
+>
+> `git push --all origin`
+
 
 Branches can be difficult to visualize in your head. GitHub has a nice feature that will let you examine your commits on each branch. Find the graphs link of your repository home page:
 
@@ -171,12 +196,15 @@ Deleted branch experimental (was c5d6cba).
 ~~~
 
 > ## Deleting a remote branch {.callout}
-> You've deleted your experimental branch locally, but if you look on your GitHub page, you'll see it still exists, even if you `git push --all origin`.  
-> To delete the branch remotely, you should use the syntax `git push origin <local-branch>:<remote-branch>`.
-> In our example this is `git push origin experimental:experimental`. 
+> You've deleted your experimental branch locally, but if you look on your GitHub page, you'll see it still exists, even if you `git push --all origin`. 
+> To delete the branch remotely, you should use the syntax:    
+>
+> `git push origin <local-branch>:<remote-branch>`  
+>
+> In our example this is: `git push origin experimental:experimental`.
 > You can also use the shorthand version: `git push origin :experimental`. 
 > Using this notation, Git assumes you are listing the remote branch and want to push the branch you are currently in on the local repo. 
-> In the code to delete a remote branch, you are essentially pushing "nothing" to the remote branch, which erases it.
+> Essentially you are pushing "nothing" to the remote branch, which erases it.
 
 
 
