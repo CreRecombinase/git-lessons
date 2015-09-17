@@ -116,7 +116,7 @@ $ git commit -m "added my file"
 ~~~ {.output}
  0 files changed
  create mode 100644 hogwarts_HP.txt
- ~~~
+~~~
 
 Your new file exists in your local repository, but it doesn't exist yet on your repo on GitHub or in the upstream repository. First, let's push these changes to our forkme repository under our GitHub account:
 
