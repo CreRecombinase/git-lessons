@@ -177,14 +177,6 @@ To https://github.com/erdavenport/planets.git
 > `git push --all origin`
 
 
-Branches can be difficult to visualize in your head. GitHub has a nice feature that will let you examine your commits on each branch. Find the graphs link of your repository home page:
-
-![Locating Graphs on GitHub](fig/github-find-graphs-image.png)  
-
-You can see a graphical representation of your commit and branch history here. If you hover your cursor over the dots (commits), a box will display the commit message and ID. Your different branches are shown in different colors, with an arrow indicating when you merged two branches together.
-
-![Viewing Branch and Commit History on GitHub](fig/github-graphs-image.png)
-
 We no longer have a use for our experimental branch. To delete a branch you don't need, you can use the `-d` flag of `git branch`:
 
 ~~~ {.bash}
