@@ -146,10 +146,6 @@ On GitHub, click the button to the right that says "Pull Requests":
 
 ![Start Pull Request](fig/github-start-pr.png)
 
-Then click the bright green button that says "New pull request":
-
-![New Pull Request](fig/github-new-pr.png)
-
 Here you'll see a dropdown saying we want to merge the changes from our head fork (`your_user_name/forkme`) to the base fork (`erdavenport/forkme`).
 To issue the pull request, click the green "Create pull request button":
 
